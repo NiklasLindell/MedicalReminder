@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Mina mediciner-->
+        <!--My Medicines-->
         <scene sceneID="A4e-cb-CbB">
             <objects>
                 <viewController id="Maj-CB-k01" customClass="ListViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
@@ -81,9 +81,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="C7L-6O-Xs9"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Mina mediciner" id="58W-tS-6yx">
+                    <navigationItem key="navigationItem" title="My Medicines" id="58W-tS-6yx">
                         <barButtonItem key="backBarButtonItem" title=" " id="zW5-wB-VGe"/>
-                        <barButtonItem key="rightBarButtonItem" title="Redigera" id="pWP-3u-KxS">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="pWP-3u-KxS">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="editButton:" destination="Maj-CB-k01" id="33T-6N-lNH"/>
@@ -158,7 +158,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="nIU-bt-GPN"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Lägg till medicin" leftItemsSupplementBackButton="YES" id="mRi-G6-U8b"/>
+                    <navigationItem key="navigationItem" title="Add Medicine" leftItemsSupplementBackButton="YES" id="mRi-G6-U8b"/>
                     <connections>
                         <outlet property="quantityLabel" destination="f7c-Pu-DDy" id="6eL-Iy-bf7"/>
                     </connections>
@@ -167,10 +167,10 @@
             </objects>
             <point key="canvasLocation" x="3348" y="425"/>
         </scene>
-        <!--Lägg till medicin-->
+        <!--Add Medicine-->
         <scene sceneID="wQy-VU-0Zq">
             <objects>
-                <viewController title="Lägg till medicin" id="pri-ml-TpU" customClass="DaysViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Medicine" id="pri-ml-TpU" customClass="DaysViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j2a-t8-Itf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,10 +240,10 @@
             </objects>
             <point key="canvasLocation" x="4196" y="425"/>
         </scene>
-        <!--Lägg till medicin-->
+        <!--Add Medicine-->
         <scene sceneID="CVd-T9-018">
             <objects>
-                <viewController title="Lägg till medicin" id="O41-kR-706" customClass="TimesViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Medicine" id="O41-kR-706" customClass="TimesViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DRD-P9-KQB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -320,10 +320,10 @@
             </objects>
             <point key="canvasLocation" x="5085.6000000000004" y="424.8768472906404"/>
         </scene>
-        <!--Lägg till medicin-->
+        <!--Add Medicine-->
         <scene sceneID="qwR-Zj-za8">
             <objects>
-                <viewController title="Lägg till medicin" id="pem-G0-yhU" customClass="QuantityViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Medicine" id="pem-G0-yhU" customClass="QuantityViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="38A-6d-1v8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -385,7 +385,7 @@
             </objects>
             <point key="canvasLocation" x="5909.6000000000004" y="424.8768472906404"/>
         </scene>
-        <!--Inställningar-->
+        <!--Settings-->
         <scene sceneID="2zo-Sn-ZRh">
             <objects>
                 <viewController id="ZrC-kr-FVM" customClass="SettingsViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
@@ -421,7 +421,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="krS-3W-N25"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Inställningar" id="jgh-sn-Jei">
+                    <navigationItem key="navigationItem" title="Settings" id="jgh-sn-Jei">
                         <barButtonItem key="backBarButtonItem" title=" " id="huI-N8-wK4"/>
                     </navigationItem>
                     <connections>
@@ -450,16 +450,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="tTG-CQ-5kS"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Receptpåminnelse" id="rif-i1-DSq"/>
+                    <navigationItem key="navigationItem" title="Refill Reminder" id="rif-i1-DSq"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aum-It-yHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3348" y="1135.7142857142858"/>
         </scene>
-        <!--Profilbild-->
+        <!--Profile Picture-->
         <scene sceneID="jvW-Ql-Jhk">
             <objects>
-                <viewController title="Profilbild" id="o6m-dt-XFK" customClass="CameraSettingViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile Picture" id="o6m-dt-XFK" customClass="CameraSettingViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OV1-et-xRv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -506,7 +506,7 @@
             </objects>
             <point key="canvasLocation" x="4196" y="1135.7142857142858"/>
         </scene>
-        <!--Medicinpåminnelsen-->
+        <!--Medical Reminder-->
         <scene sceneID="BOn-p5-bjq">
             <objects>
                 <viewController id="hJc-lk-QFh" customClass="HomeViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
@@ -536,6 +536,7 @@
                                 <rect key="frame" x="0.0" y="396" width="375" height="333"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeCell" id="eC4-PI-PgM">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -544,8 +545,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="hJc-lk-QFh" id="V2q-1Z-mRo"/>
+                                    <outlet property="delegate" destination="hJc-lk-QFh" id="CxK-HV-RNu"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MAJ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3w-bQ-hiU">
                                 <rect key="frame" x="130" y="260" width="114" height="23"/>
@@ -558,11 +564,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="aPd-iE-4r9"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Medicinpåminnelsen" id="Yx1-AG-mkB"/>
+                    <navigationItem key="navigationItem" title="Medical Reminder" id="Yx1-AG-mkB"/>
                     <connections>
                         <outlet property="dayLabel" destination="fRc-Qa-uOA" id="PFh-3m-1rz"/>
+                        <outlet property="homeTableView" destination="BpJ-rR-raK" id="UqU-Ml-BLW"/>
                         <outlet property="monthLabel" destination="e3w-bQ-hiU" id="IAk-8L-5HS"/>
-                        <outlet property="yearLabel" destination="Ftv-A2-t8O" id="Nok-Hm-d3M"/>
+                        <outlet property="weekdayLabel" destination="Ftv-A2-t8O" id="1cN-vN-EkX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oW5-uN-Zd5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -735,7 +742,7 @@
         <image name="Settings" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aMf-sC-M6J"/>
+        <segue reference="Ape-bR-d7E"/>
         <segue reference="iwc-yJ-iaT"/>
     </inferredMetricsTieBreakers>
 </document>

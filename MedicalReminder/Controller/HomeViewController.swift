@@ -1,36 +1,174 @@
 import UIKit
+import CoreData
 
-class HomeViewController: UIViewController {
-    
-    
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+   
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
-    @IBOutlet weak var yearLabel: UILabel!
+    @IBOutlet weak var weekdayLabel: UILabel!
+    
+    @IBOutlet weak var homeTableView: UITableView!
+    
+    
+    var todaysMedicine: [Medicine] = []
     
     
     let date = Date()
     let formatter = DateFormatter()
     
+    let homeCell = "homeCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         dayLabel.text = date.toString(dateFormat: "dd")
         monthLabel.text = date.toString(dateFormat: "LLLL")
-        yearLabel.text = date.toString(dateFormat: "yyyy")
+        weekdayLabel.text = date.toString(dateFormat: "EEEE")
         
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//
-//        UIView.animate(withDuration: 3.0) {
-//            self.progressView.value = 60
-//        }
-//    }
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.progressView.value = 0
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        let fetchRequest: NSFetchRequest<Medicine> = Medicine.fetchRequest()
+        do {
+            let medicine = try PersistenceService.context.fetch(fetchRequest)
+            medicineList = medicine
+            homeTableView.reloadData()
+        } catch {}
+        
+        getMedicineForDay()
+        homeTableView.reloadData()
+    }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return todaysMedicine.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: homeCell, for: indexPath)
+        cell.textLabel?.text = todaysMedicine[indexPath.row].name
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.font = UIFont(name: "Hiragino Sans", size: 20)
+        return cell
+    }
+
+    func getMedicineForDay() {
+        
+        let dayName = date.toString(dateFormat: "EEEE")
+        
+        if dayName == "Monday" {
+    
+            for medicine in medicineList{
+                
+                if medicine.monday == true {
+        
+                    if todaysMedicine.contains(medicine){
+                        print("Finns redan i listan")
+                    }else{
+                        todaysMedicine.append(medicine)
+                    }
+                }
+                
+            }
+   
+        }
+        if dayName == "Tuesday" {
+            for medicine in medicineList{
+                
+                if medicine.tuesday == true {
+                    
+                    if todaysMedicine.contains(medicine){
+                        print("Finns redan i listan")
+                    }else{
+                        todaysMedicine.append(medicine)
+                    }
+                }
+                
+            }
+        }
+        if dayName == "Wednesday"{
+            for medicine in medicineList{
+                
+                if medicine.wednesday == true {
+                    
+                    if todaysMedicine.contains(medicine){
+                        print("Finns redan i listan")
+                    }else{
+                        todaysMedicine.append(medicine)
+                    }
+                }
+                
+            }
+        }
+        if dayName == "Thursday" {
+            for medicine in medicineList{
+                
+                if medicine.thursday == true {
+                    
+                    if todaysMedicine.contains(medicine){
+                        print("Finns redan i listan")
+                    }else{
+                        todaysMedicine.append(medicine)
+                    }
+                }
+                
+            }
+        }
+        if dayName == "Friday" {
+            for medicine in medicineList{
+                
+                if medicine.friday == true {
+                    
+                    if todaysMedicine.contains(medicine){
+                        print("Finns redan i listan")
+                    }else{
+                        todaysMedicine.append(medicine)
+                    }
+                }
+                
+            }
+        }
+        if dayName == "Saturday" {
+            for medicine in medicineList{
+                
+                if medicine.saturday == true {
+                    
+                    if todaysMedicine.contains(medicine){
+                        print("Finns redan i listan")
+                    }else{
+                        todaysMedicine.append(medicine)
+                    }
+                }
+                
+            }
+        }
+        if dayName == "Sunday" {
+            for medicine in medicineList{
+                
+                if medicine.sunday == true {
+                    
+                    if todaysMedicine.contains(medicine){
+                        print("Finns redan i listan")
+                    }else{
+                        todaysMedicine.append(medicine)
+                    }
+                }
+                
+            }
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

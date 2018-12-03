@@ -8,7 +8,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     let goToReminder = "goToReminderSettings"
     let goToImage = "goToImageSettings"
     
-    var settingsLabel: [String] = ["Receptpåminnelse", "Profilbild"]
+    var settingsLabel: [String] = ["Refill reminder", "Profile picture"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -20,5 +20,12 @@ extension Medicine {
     @NSManaged public var name: String?
     @NSManaged public var quantity: Int16
     @NSManaged public var totalQuantity: Int16
+    @NSManaged public var monday: Bool
+    @NSManaged public var tuesday: Bool
+    @NSManaged public var wednesday: Bool
+    @NSManaged public var thursday: Bool
+    @NSManaged public var friday: Bool
+    @NSManaged public var saturday: Bool
+    @NSManaged public var sunday: Bool
 
 }
