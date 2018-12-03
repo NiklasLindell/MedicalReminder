@@ -8,10 +8,16 @@ class DaysViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var daysCell: String = "daysCell"
     
     let days: [String] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    var checked: [Bool] = [false, false, false, false, false, false, false]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        CheckedDay.monday = false
+        CheckedDay.tuesday = false
+        CheckedDay.wednesday = false
+        CheckedDay.thursday = false
+        CheckedDay.friday = false
+        CheckedDay.saturday = false
+        CheckedDay.sunday = false
         
     }
     
@@ -39,37 +45,36 @@ class DaysViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
         if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark{
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
             
             if(indexPath.row == 0){
-                let unChecked = false
-                CheckedDay.monday = unChecked
+                
+                CheckedDay.monday = false
             }
             if(indexPath.row == 1){
-                let unChecked = false
-                CheckedDay.tuesday = unChecked
+                
+                CheckedDay.tuesday = false
             }
             if(indexPath.row == 2){
-                let unChecked = false
-                CheckedDay.wednesday = unChecked
+                
+                CheckedDay.wednesday = false
             }
             if(indexPath.row == 3){
-                let unChecked = false
-                CheckedDay.thursday = unChecked
+                
+                CheckedDay.thursday = false
             }
             if(indexPath.row == 4){
-                let unChecked = false
-                CheckedDay.friday = unChecked
+                
+                CheckedDay.friday = false
             }
             if(indexPath.row == 5){
-                let unChecked = false
-                CheckedDay.saturday = unChecked
+                
+                CheckedDay.saturday = false
             }
             if(indexPath.row == 6){
-                let unChecked = false
-                CheckedDay.sunday = unChecked
+                
+                CheckedDay.sunday = false
             }
             
             
@@ -77,50 +82,38 @@ class DaysViewController: UIViewController, UITableViewDataSource, UITableViewDe
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
             
             if(indexPath.row == 0){
-                let checked = true
-                CheckedDay.monday = checked
+                
+                CheckedDay.monday = true
             }
             if(indexPath.row == 1){
-                let checked = true
-                 CheckedDay.tuesday = checked
+               
+                 CheckedDay.tuesday = true
             }
             if(indexPath.row == 2){
-                let checked = true
-                CheckedDay.wednesday = checked
+                
+                CheckedDay.wednesday = true
                 
             }
             if(indexPath.row == 3){
-                let checked = true
-                CheckedDay.thursday = checked
+          
+                CheckedDay.thursday = true
             }
             if(indexPath.row == 4){
-                let checked = true
-                CheckedDay.friday = checked
+      
+                CheckedDay.friday = true
             }
             if(indexPath.row == 5){
-                let checked = true
-                CheckedDay.saturday = checked
+           
+                CheckedDay.saturday = true
             }
             if(indexPath.row == 6){
-                let checked = true
-                CheckedDay.sunday = checked
+        
+                CheckedDay.sunday = true
             }
         }
         
     }
     
-    @IBAction func nextButton(_ sender: Any) {
-        
-        print("Mån \(CheckedDay.monday)")
-        print("Tis \(CheckedDay.tuesday)")
-        print("Ons \(CheckedDay.wednesday)")
-        print("Tor \(CheckedDay.thursday)")
-        print("Fre \(CheckedDay.friday)")
-        print("Lör \(CheckedDay.saturday)")
-        print("Sön \(CheckedDay.sunday)")
-        
-        
-    }
 }
 
 struct CheckedDay {

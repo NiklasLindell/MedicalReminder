@@ -1,6 +1,8 @@
 import UIKit
 import CoreData
 
+
+
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
     @IBOutlet weak var dayLabel: UILabel!
@@ -10,8 +12,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var homeTableView: UITableView!
     
     
-    var todaysMedicine: [Medicine] = []
     
+    var todaysMedicine: [Medicine] = []
     
     let date = Date()
     let formatter = DateFormatter()
@@ -21,7 +23,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        let fetchRequest: NSFetchRequest<Medicine> = Medicine.fetchRequest()
+        do {
+            let medicine = try PersistenceService.context.fetch(fetchRequest)
+            medicineList = medicine
+            homeTableView.reloadData()
+        } catch {}
         
         dayLabel.text = date.toString(dateFormat: "dd")
         monthLabel.text = date.toString(dateFormat: "LLLL")
@@ -30,13 +37,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let fetchRequest: NSFetchRequest<Medicine> = Medicine.fetchRequest()
-        do {
-            let medicine = try PersistenceService.context.fetch(fetchRequest)
-            medicineList = medicine
-            homeTableView.reloadData()
-        } catch {}
-        
+        todaysMedicine = []
         getMedicineForDay()
         homeTableView.reloadData()
     }
@@ -48,8 +49,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: homeCell, for: indexPath)
         cell.textLabel?.text = todaysMedicine[indexPath.row].name
+        cell.detailTextLabel?.text = ("\(todaysMedicine[indexPath.row].quantity)st per intag")
         cell.textLabel?.textColor = UIColor.white
+        cell.detailTextLabel?.textColor = UIColor.white
         cell.textLabel?.font = UIFont(name: "Hiragino Sans", size: 20)
+        cell.detailTextLabel?.font = UIFont(name: "Hiragino Sans", size: 15)
+        cell.selectionStyle = .none
         return cell
     }
 

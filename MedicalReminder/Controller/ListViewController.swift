@@ -3,7 +3,7 @@ import CoreData
 
 var medicineList = [Medicine]()
 
-class ListViewController: UIViewController, UITabBarDelegate, UITableViewDataSource{
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var listTableView: UITableView!
@@ -54,6 +54,8 @@ class ListViewController: UIViewController, UITabBarDelegate, UITableViewDataSou
             medicineList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             PersistenceService.saveContext()
+            self.viewWillAppear(true)
+            
         }
     }
     

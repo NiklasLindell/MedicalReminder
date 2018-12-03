@@ -60,8 +60,7 @@ class QuantityViewController: UIViewController {
         
         PersistenceService.saveContext()
         medicineList.append(medicine)
-        
-      
+
         performSegue(withIdentifier: "goToList", sender: self)
         self.dismiss(animated: false, completion: nil)
     }

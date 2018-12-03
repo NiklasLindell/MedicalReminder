@@ -6,9 +6,10 @@ class TimesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     
     var timesList: [String] = []
-    var time: String = ""
     
     var timesCell: String = "timesCell"
+    
+    var showingTime: String = ""
     
     var hour: Int = 0
     var minute: Int = 0
@@ -25,16 +26,10 @@ class TimesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         let selectedTime = dateFormatter.string(from: pickerView.date)
-        time = selectedTime
-        
-        print(time)
+        showingTime = selectedTime // To show in tableview
     }
     
-    
-    
-    
     @IBAction func addTime(_ sender: Any) {
-        timesList.append(time)
         tableView.reloadData()
     }
     
