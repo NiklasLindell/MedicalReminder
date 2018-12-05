@@ -3,6 +3,8 @@ import UIKit
 class CameraSettingsViewController: UIViewController, UINavigationControllerDelegate ,UIImagePickerControllerDelegate {
     
     
+    @IBOutlet weak var hej: UIImageView!
+    
     @IBOutlet weak var imageView: UIImageView!
     
     var imagePicker: UIImagePickerController!

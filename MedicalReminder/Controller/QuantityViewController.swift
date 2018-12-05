@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import UserNotifications
 
 class QuantityViewController: UIViewController {
     
@@ -8,6 +9,7 @@ class QuantityViewController: UIViewController {
     
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var totalQuantityLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,9 +59,16 @@ class QuantityViewController: UIViewController {
         medicine.friday = CheckedDay.friday
         medicine.saturday = CheckedDay.saturday
         medicine.sunday = CheckedDay.sunday
+        medicine.time = Time.timeList
         
         PersistenceService.saveContext()
         medicineList.append(medicine)
+        
+        
+        
+        
+        
+        
 
         performSegue(withIdentifier: "goToList", sender: self)
         self.dismiss(animated: false, completion: nil)

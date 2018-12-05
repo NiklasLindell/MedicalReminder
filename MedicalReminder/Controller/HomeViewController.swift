@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import UserNotifications
 
 
 
@@ -12,16 +13,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var homeTableView: UITableView!
     
     
-    
     var todaysMedicine: [Medicine] = []
     
     let date = Date()
     let formatter = DateFormatter()
     
+    
     let homeCell = "homeCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
+        
+       
         
         let fetchRequest: NSFetchRequest<Medicine> = Medicine.fetchRequest()
         do {
@@ -49,13 +54,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: homeCell, for: indexPath)
         cell.textLabel?.text = todaysMedicine[indexPath.row].name
-        cell.detailTextLabel?.text = ("\(todaysMedicine[indexPath.row].quantity)st per intag")
+        cell.detailTextLabel?.text = ("\(todaysMedicine[indexPath.row].quantity)pcs per intake")
         cell.textLabel?.textColor = UIColor.white
         cell.detailTextLabel?.textColor = UIColor.white
         cell.textLabel?.font = UIFont(name: "Hiragino Sans", size: 20)
         cell.detailTextLabel?.font = UIFont(name: "Hiragino Sans", size: 15)
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
     }
 
     func getMedicineForDay() {
@@ -167,24 +176,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 
 
-
-
-
-
-
-
-
-
-
-
 extension Date
 {
-    func toString( dateFormat format  : String ) -> String
+    func toString(dateFormat format  : String ) -> String
     {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
+    
     
 }
 

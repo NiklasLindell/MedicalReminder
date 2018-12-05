@@ -37,13 +37,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: listCell, for: indexPath)
         cell.textLabel?.text = medicineList[indexPath.row].name
-        cell.detailTextLabel?.text = ("\(medicineList[indexPath.row].totalQuantity)st left")
+        cell.detailTextLabel?.text = ("\(medicineList[indexPath.row].totalQuantity)pcs left")
         cell.textLabel?.textColor = UIColor.white
         cell.detailTextLabel?.textColor = UIColor.white
         cell.textLabel?.font = UIFont(name: "Hiragino Sans", size: 20)
         cell.detailTextLabel?.font = UIFont(name: "Hiragino Sans", size: 15)
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
