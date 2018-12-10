@@ -18,7 +18,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     let date = Date()
     let formatter = DateFormatter()
     
-    
     let homeCell = "homeCell"
     
     override func viewDidLoad() {

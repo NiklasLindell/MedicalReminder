@@ -27,6 +27,5 @@ extension Medicine {
     @NSManaged public var friday: Bool
     @NSManaged public var saturday: Bool
     @NSManaged public var sunday: Bool
-    @NSManaged public var time: [Date]
 
 }

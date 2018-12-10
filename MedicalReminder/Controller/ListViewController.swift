@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import UserNotifications
 
 var medicineList = [Medicine]()
 
@@ -7,6 +8,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var listTableView: UITableView!
+    
+    let center = UNUserNotificationCenter.current()
     
     let goToAdd: String = "goToAddMedicine"
     let listCell = "listCell"
@@ -54,14 +57,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if editingStyle == .delete {
             let commit = medicineList[indexPath.row]
+            print(medicineList[indexPath.row].name!)
+            center.removePendingNotificationRequests(withIdentifiers: [medicineList[indexPath.row].name!]) // Deleting notification
             PersistenceService.persistentContainer.viewContext.delete(commit) //Deleting from CoreData
             medicineList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             PersistenceService.saveContext()
+            
             self.viewWillAppear(true)
             
         }
     }
+    
     
     @IBAction func editButton(_ sender: UIBarButtonItem) {
         listTableView.isEditing = !listTableView.isEditing

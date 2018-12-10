@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import UserNotifications
 
 
 @UIApplicationMain
@@ -10,6 +11,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        application.applicationIconBadgeNumber = 0
+
+        
+        
+        //Delete schedule notifications 
+//        print(UIApplication.shared.scheduledLocalNotifications?.count)
+//        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+//        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        
+     
+      
         return true
     }
     
