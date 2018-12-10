@@ -10,7 +10,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var listTableView: UITableView!
     
     let center = UNUserNotificationCenter.current()
-    
     let goToAdd: String = "goToAddMedicine"
     let listCell = "listCell"
     
@@ -58,17 +57,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if editingStyle == .delete {
             let commit = medicineList[indexPath.row]
             print(medicineList[indexPath.row].name!)
-            center.removePendingNotificationRequests(withIdentifiers: [medicineList[indexPath.row].name!]) // Deleting notification
+            center.removePendingNotificationRequests(withIdentifiers: [medicineList[indexPath.row].identifire!]) // Deleting notification
             PersistenceService.persistentContainer.viewContext.delete(commit) //Deleting from CoreData
             medicineList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             PersistenceService.saveContext()
-            
             self.viewWillAppear(true)
-            
         }
     }
-    
     
     @IBAction func editButton(_ sender: UIBarButtonItem) {
         listTableView.isEditing = !listTableView.isEditing
@@ -76,29 +72,22 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func addMedicineButtonPressed(_ sender: UIButton) {
-        
         let alert = UIAlertController(title: "Add medicine", message: nil, preferredStyle: .alert)
-        
         alert.addTextField { (textField) in
             textField.placeholder = "Name..."
         }
-        
         let continueAction = UIAlertAction(title: "Continue", style: .default) { (_) in
             Name.medicineName = alert.textFields!.first!.text!
             self.performSegue(withIdentifier: self.goToAdd, sender: nil)
         }
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (action) in
             self.dismiss(animated: true, completion: nil)
         })
-        
         alert.addAction(cancelAction)
         alert.addAction(continueAction)
-        
         present(alert, animated: true, completion: nil)
     }
-    
 }
 
 struct Name {

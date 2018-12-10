@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F58959C21BEA99A00A79D6C /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F58959B21BEA99A00A79D6C /* Cell.xib */; };
+		4F58959E21BEAA4000A79D6C /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F58959D21BEAA4000A79D6C /* TableViewCell.swift */; };
 		4FAF597321B14A3E00A2B19A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FAF597221B14A3B00A2B19A /* Assets.xcassets */; };
 		4FB7C73F21B161BF00700C59 /* Medicine+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7C73D21B161BF00700C59 /* Medicine+CoreDataClass.swift */; };
 		4FB7C74021B161BF00700C59 /* Medicine+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7C73E21B161BF00700C59 /* Medicine+CoreDataProperties.swift */; };
@@ -20,7 +22,7 @@
 		4FF9B3C021B143EA00ADBBD2 /* MedicalReminderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3BF21B143EA00ADBBD2 /* MedicalReminderTests.swift */; };
 		4FF9B3CB21B143EA00ADBBD2 /* MedicalReminderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3CA21B143EA00ADBBD2 /* MedicalReminderUITests.swift */; };
 		4FF9B3DE21B144FF00ADBBD2 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3DD21B144FF00ADBBD2 /* ListViewController.swift */; };
-		4FF9B3E021B1450F00ADBBD2 /* QuantityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3DF21B1450F00ADBBD2 /* QuantityViewController.swift */; };
+		4FF9B3E021B1450F00ADBBD2 /* SaveMedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3DF21B1450F00ADBBD2 /* SaveMedicineViewController.swift */; };
 		4FF9B3E221B1451900ADBBD2 /* TimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3E121B1451900ADBBD2 /* TimesViewController.swift */; };
 		4FF9B3E421B1452800ADBBD2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3E321B1452800ADBBD2 /* SettingsViewController.swift */; };
 		4FF9B3E621B1453400ADBBD2 /* CameraSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3E521B1453400ADBBD2 /* CameraSettingsViewController.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F58959B21BEA99A00A79D6C /* Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
+		4F58959D21BEAA4000A79D6C /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		4FAF597221B14A3B00A2B19A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FB7C73D21B161BF00700C59 /* Medicine+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Medicine+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4FB7C73E21B161BF00700C59 /* Medicine+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Medicine+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -63,7 +67,7 @@
 		4FF9B3CA21B143EA00ADBBD2 /* MedicalReminderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalReminderUITests.swift; sourceTree = "<group>"; };
 		4FF9B3CC21B143EA00ADBBD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FF9B3DD21B144FF00ADBBD2 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		4FF9B3DF21B1450F00ADBBD2 /* QuantityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityViewController.swift; sourceTree = "<group>"; };
+		4FF9B3DF21B1450F00ADBBD2 /* SaveMedicineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMedicineViewController.swift; sourceTree = "<group>"; };
 		4FF9B3E121B1451900ADBBD2 /* TimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesViewController.swift; sourceTree = "<group>"; };
 		4FF9B3E321B1452800ADBBD2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4FF9B3E521B1453400ADBBD2 /* CameraSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSettingsViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +98,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F58959A21BEA98100A79D6C /* Costum Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4F58959B21BEA99A00A79D6C /* Cell.xib */,
+				4F58959D21BEAA4000A79D6C /* TableViewCell.swift */,
+			);
+			path = "Costum Cell";
+			sourceTree = "<group>";
+		};
 		4FF9B39B21B143E900ADBBD2 = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +133,7 @@
 				4FF9B3D821B1445A00ADBBD2 /* Model */,
 				4FF9B3D921B1446300ADBBD2 /* View */,
 				4FF9B3DA21B1446A00ADBBD2 /* Controller */,
+				4F58959A21BEA98100A79D6C /* Costum Cell */,
 				4FAF597221B14A3B00A2B19A /* Assets.xcassets */,
 				4FF9B3B621B143EA00ADBBD2 /* Info.plist */,
 				4FF9B3AE21B143E900ADBBD2 /* MedicalReminder.xcdatamodeld */,
@@ -170,9 +184,9 @@
 				4FF29AFB21B14828008ADB66 /* PersistenceService.swift */,
 				4FF9B3A921B143E900ADBBD2 /* HomeViewController.swift */,
 				4FF9B3DD21B144FF00ADBBD2 /* ListViewController.swift */,
-				4FF9B3DF21B1450F00ADBBD2 /* QuantityViewController.swift */,
 				4FF29AF521B146C3008ADB66 /* DaysViewController.swift */,
 				4FF9B3E121B1451900ADBBD2 /* TimesViewController.swift */,
+				4FF9B3DF21B1450F00ADBBD2 /* SaveMedicineViewController.swift */,
 				4FF9B3E321B1452800ADBBD2 /* SettingsViewController.swift */,
 				4FF9B3E521B1453400ADBBD2 /* CameraSettingsViewController.swift */,
 			);
@@ -284,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FF9B3B521B143EA00ADBBD2 /* LaunchScreen.storyboard in Resources */,
+				4F58959C21BEA99A00A79D6C /* Cell.xib in Resources */,
 				4FAF597321B14A3E00A2B19A /* Assets.xcassets in Resources */,
 				4FF29AF221B1464D008ADB66 /* Main.storyboard in Resources */,
 			);
@@ -310,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F58959E21BEAA4000A79D6C /* TableViewCell.swift in Sources */,
 				4FF9B3AA21B143E900ADBBD2 /* HomeViewController.swift in Sources */,
 				4FF29AFC21B14828008ADB66 /* PersistenceService.swift in Sources */,
 				4FF9B3E221B1451900ADBBD2 /* TimesViewController.swift in Sources */,
@@ -317,7 +333,7 @@
 				4FF9B3E421B1452800ADBBD2 /* SettingsViewController.swift in Sources */,
 				4FB7C73F21B161BF00700C59 /* Medicine+CoreDataClass.swift in Sources */,
 				4FF9B3B021B143E900ADBBD2 /* MedicalReminder.xcdatamodeld in Sources */,
-				4FF9B3E021B1450F00ADBBD2 /* QuantityViewController.swift in Sources */,
+				4FF9B3E021B1450F00ADBBD2 /* SaveMedicineViewController.swift in Sources */,
 				4FF9B3DE21B144FF00ADBBD2 /* ListViewController.swift in Sources */,
 				4FF29AF621B146C3008ADB66 /* DaysViewController.swift in Sources */,
 				4FF9B3E621B1453400ADBBD2 /* CameraSettingsViewController.swift in Sources */,

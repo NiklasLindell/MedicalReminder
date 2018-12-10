@@ -2,16 +2,15 @@ import UIKit
 import CoreData
 import UserNotifications
 
-class QuantityViewController: UIViewController {
+class SaveMedicineViewController: UIViewController {
     
     var quantityShow: Int = 1
     var totalQuantity: Int = 25
-    
     var checkedDayArray: [Int] = []
+    let identifire = UUID().uuidString
     
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var totalQuantityLabel: UILabel!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +51,6 @@ class QuantityViewController: UIViewController {
     @IBAction func finishButtonPressed(_ sender: UIButton) {
         
         let medicine = Medicine(context: PersistenceService.context)
-        
         medicine.name = Name.medicineName
         medicine.quantity = Int16(Quantity.newQuantity)
         medicine.totalQuantity = Int16(totalQuantity)
@@ -63,7 +61,9 @@ class QuantityViewController: UIViewController {
         medicine.friday = CheckedDay.friday
         medicine.saturday = CheckedDay.saturday
         medicine.sunday = CheckedDay.sunday
-        
+        medicine.hour = Int16(Time.hour)
+        medicine.minute = Int16(Time.minute)
+        medicine.identifire = identifire
         
         PersistenceService.saveContext()
         medicineList.append(medicine)
@@ -78,25 +78,16 @@ class QuantityViewController: UIViewController {
         content.body = "Go to Medical Reminder and check your medicine"
         content.sound = UNNotificationSound.default
         content.badge = 1
-        
         var dateComponents = DateComponents()
-        
-        
-        
         for days in checkedDayArray{
-            
             dateComponents.weekday = days
             dateComponents.hour = Time.hour
             dateComponents.minute = Time.minute
-            
-        
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            let request = UNNotificationRequest(identifier: Name.medicineName, content: content, trigger: trigger)
-        
+            let request = UNNotificationRequest(identifier: identifire, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }
     }
-    
     
     func CheckedDayConverter() {
         if CheckedDay.monday == true {
@@ -121,9 +112,7 @@ class QuantityViewController: UIViewController {
             checkedDayArray.append(1)
         }
     }
-   
 }
-
 
 struct Quantity {
     static var newQuantity: Int = 0

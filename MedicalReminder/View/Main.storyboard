@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Medicines-->
+        <!--My medicines-->
         <scene sceneID="A4e-cb-CbB">
             <objects>
                 <viewController id="Maj-CB-k01" customClass="ListViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,32 +30,14 @@
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.3024661541" green="0.43263322110000002" blue="0.64708316330000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="listCell" textLabel="nn4-qq-V3I" detailTextLabel="CkW-1F-o28" style="IBUITableViewCellStyleSubtitle" id="rsO-7h-uw6">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="listCell" id="pFQ-Ry-B0J">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rsO-7h-uw6" id="1b2-A5-2Al">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pFQ-Ry-B0J" id="bwh-6w-zx0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nn4-qq-V3I">
-                                                    <rect key="frame" x="15" y="5" width="33.333333333333336" height="20.333333333333332"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CkW-1F-o28">
-                                                    <rect key="frame" x="14.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -83,7 +65,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="C7L-6O-Xs9"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Medicines" id="58W-tS-6yx">
+                    <navigationItem key="navigationItem" title="My medicines" id="58W-tS-6yx">
                         <barButtonItem key="backBarButtonItem" title=" " id="zW5-wB-VGe"/>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="pWP-3u-KxS">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -104,7 +86,7 @@
         <!--Lägg till medicin-->
         <scene sceneID="Vym-ti-ymf">
             <objects>
-                <viewController title="Lägg till medicin" id="pyf-tu-weq" customClass="QuantityViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Lägg till medicin" id="pyf-tu-weq" customClass="SaveMedicineViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5xW-R2-H68">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -294,7 +276,7 @@
         <!--Add Medicine-->
         <scene sceneID="qwR-Zj-za8">
             <objects>
-                <viewController title="Add Medicine" id="pem-G0-yhU" customClass="QuantityViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Medicine" id="pem-G0-yhU" customClass="SaveMedicineViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="38A-6d-1v8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -470,7 +452,7 @@
             </objects>
             <point key="canvasLocation" x="3348" y="1136"/>
         </scene>
-        <!--Medical Reminder-->
+        <!--Medical reminder-->
         <scene sceneID="BOn-p5-bjq">
             <objects>
                 <viewController id="hJc-lk-QFh" customClass="HomeViewController" customModule="MedicalReminder" customModuleProvider="target" sceneMemberID="viewController">
@@ -546,7 +528,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="aPd-iE-4r9"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Medical Reminder" id="Yx1-AG-mkB"/>
+                    <navigationItem key="navigationItem" title="Medical reminder" id="Yx1-AG-mkB"/>
                     <connections>
                         <outlet property="dayLabel" destination="fRc-Qa-uOA" id="PFh-3m-1rz"/>
                         <outlet property="homeTableView" destination="BpJ-rR-raK" id="UqU-Ml-BLW"/>
@@ -567,8 +549,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.67066341640000005" green="0.72515839339999999" blue="0.75686293839999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.46712017579999998" green="0.5224804045" blue="0.56646573600000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="selectedImageTintColor" red="0.53725490196078429" green="0.42745098039215684" blue="0.38823529411764707" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <segue destination="ttz-rP-P0w" kind="relationship" relationship="viewControllers" id="GUY-4I-7qR"/>
@@ -580,18 +562,18 @@
             </objects>
             <point key="canvasLocation" x="-132" y="425"/>
         </scene>
-        <!--Hem-->
+        <!--Home-->
         <scene sceneID="4qC-j1-tEp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ttz-rP-P0w" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Hem" image="Home" id="kpB-2U-PRa">
-                        <color key="badgeColor" red="0.95259577039999999" green="0.67718785999999997" blue="0.23901718850000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="Home" id="kpB-2U-PRa">
+                        <color key="badgeColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="w9e-qD-naP">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.5726584792137146" green="0.63868069648742676" blue="0.69020003080368042" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.46712017582796173" green="0.52248040451953481" blue="0.56646573604060912" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="21"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -608,16 +590,16 @@
             </objects>
             <point key="canvasLocation" x="736.79999999999995" y="-273.39901477832512"/>
         </scene>
-        <!--Mina mediciner-->
+        <!--My medicines-->
         <scene sceneID="PH7-ap-yJ5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3mO-cP-NxH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Mina mediciner" image="Folder" id="ufP-Vb-5Zn"/>
+                    <tabBarItem key="tabBarItem" title="My medicines" image="Folder" id="ufP-Vb-5Zn"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ubP-yR-Gs8">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.62753862142562866" green="0.6858629584312439" blue="0.72549194097518921" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.46712017579999998" green="0.5224804045" blue="0.56646573600000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -634,11 +616,11 @@
             </objects>
             <point key="canvasLocation" x="736.79999999999995" y="424.8768472906404"/>
         </scene>
-        <!--Inställningar-->
+        <!--Settings-->
         <scene sceneID="3yk-fw-QEZ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lhX-y2-TX7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Inställningar" image="Settings" id="6Ke-ZD-f2J">
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" id="6Ke-ZD-f2J">
                         <color key="badgeColor" red="0.95259577039999999" green="0.67718785999999997" blue="0.23901718850000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -646,7 +628,7 @@
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.67066341638565063" green="0.72515839338302612" blue="0.75686293840408325" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.46712017579999998" green="0.5224804045" blue="0.56646573600000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -672,7 +654,7 @@
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.63929134607315063" green="0.69378572702407837" blue="0.72549062967300415" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.46712017579999998" green="0.5224804045" blue="0.56646573600000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
