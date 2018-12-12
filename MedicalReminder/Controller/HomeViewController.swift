@@ -1,6 +1,7 @@
 import UIKit
 import CoreData
 import UserNotifications
+import MBCircularProgressBar
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
@@ -8,8 +9,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var weekdayLabel: UILabel!
     @IBOutlet weak var homeTableView: UITableView!
+    @IBOutlet weak var progressCircle: MBCircularProgressBarView!
     
     var todaysMedicine: [Medicine] = []
+    var checkedMedicine: CGFloat = 0
     
     let date = Date()
     let formatter = DateFormatter()
@@ -31,12 +34,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         dayLabel.text = date.toString(dateFormat: "dd")
         monthLabel.text = date.toString(dateFormat: "LLLL")
         weekdayLabel.text = date.toString(dateFormat: "EEEE")
+        self.progressCircle.value = checkedMedicine
     }
     
     override func viewWillAppear(_ animated: Bool) {
         todaysMedicine = []
         getMedicineForDay()
         homeTableView.reloadData()
+        self.progressCircle.maxValue = CGFloat(todaysMedicine.count)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 1.5) {
+            self.progressCircle.value = self.checkedMedicine
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,19 +57,41 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         
-        cell.timeLabel.text = "\(todaysMedicine[indexPath.row].hour):\(todaysMedicine[indexPath.row].minute)"
+        
+        if todaysMedicine[indexPath.row].minute < 10{
+            cell.timeLabel.text = "\(todaysMedicine[indexPath.row].hour):0\(todaysMedicine[indexPath.row].minute)"
+        } else{
+            cell.timeLabel.text = "\(todaysMedicine[indexPath.row].hour):\(todaysMedicine[indexPath.row].minute)"
+        }
+        
         cell.nameLabel?.text = todaysMedicine[indexPath.row].name
         cell.amountLabel.text = ("\(todaysMedicine[indexPath.row].quantity)pcs per intake")
         cell.textLabel?.textColor = UIColor.white
-//        cell.detailTextLabel?.textColor = UIColor.white
-//        cell.textLabel?.font = UIFont(name: "Hiragino Sans", size: 20)
-//        cell.detailTextLabel?.font = UIFont(name: "Hiragino Sans", size: 15)
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 87
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if tableView == homeTableView {
+            if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark{
+                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+                self.checkedMedicine = self.checkedMedicine - 1
+                self.viewDidAppear(true)
+                
+            } else {
+                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+                self.checkedMedicine = self.checkedMedicine + 1
+                self.viewDidAppear(true)
+              
+            }
+        }
     }
 
     func getMedicineForDay() {

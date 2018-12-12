@@ -7,7 +7,7 @@ class SaveMedicineViewController: UIViewController {
     var quantityShow: Int = 1
     var totalQuantity: Int = 25
     var checkedDayArray: [Int] = []
-    let identifire = UUID().uuidString
+    var identifier = UUID().uuidString
     
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var totalQuantityLabel: UILabel!
@@ -63,29 +63,39 @@ class SaveMedicineViewController: UIViewController {
         medicine.sunday = CheckedDay.sunday
         medicine.hour = Int16(Time.hour)
         medicine.minute = Int16(Time.minute)
-        medicine.identifire = identifire
+        medicine.identifier = identifier
         
         PersistenceService.saveContext()
         medicineList.append(medicine)
         setNotificationTime()
+        print(UIApplication.shared.scheduledLocalNotifications?.count)
         performSegue(withIdentifier: "goToList", sender: self)
         self.dismiss(animated: false, completion: nil)
     }
     
     func setNotificationTime(){
+      
         let content = UNMutableNotificationContent()
         content.title = "Time to take your medicine!"
-        content.body = "Go to Medical Reminder and check your medicine"
+        content.body = "\(Name.medicineName) \(Quantity.newQuantity)pcs"
         content.sound = UNNotificationSound.default
         content.badge = 1
         var dateComponents = DateComponents()
         for days in checkedDayArray{
+            var notiID = self.identifier
+            notiID += String(days)
+            print(notiID)
+            NotificationsID.IDList.append(identifier)
             dateComponents.weekday = days
             dateComponents.hour = Time.hour
             dateComponents.minute = Time.minute
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            let request = UNNotificationRequest(identifier: identifire, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            notiID = self.identifier
+            
+            
+            
         }
     }
     
@@ -117,6 +127,11 @@ class SaveMedicineViewController: UIViewController {
 struct Quantity {
     static var newQuantity: Int = 0
 }
+
+struct NotificationsID {
+    static var IDList = [String]()
+}
+
 
 
 

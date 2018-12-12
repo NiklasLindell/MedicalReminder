@@ -21,6 +21,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             medicineList = medicine
             listTableView.reloadData()
         } catch {}
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,11 +55,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
         if editingStyle == .delete {
+            for i in 1...7{
+                center.removePendingNotificationRequests(withIdentifiers: [medicineList[indexPath.row].identifier! + String(i)]) // Deleting notification
+            }
             let commit = medicineList[indexPath.row]
-            print(medicineList[indexPath.row].name!)
-            center.removePendingNotificationRequests(withIdentifiers: [medicineList[indexPath.row].identifire!]) // Deleting notification
             PersistenceService.persistentContainer.viewContext.delete(commit) //Deleting from CoreData
             medicineList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)

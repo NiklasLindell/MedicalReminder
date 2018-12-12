@@ -8,18 +8,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    
+   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         application.applicationIconBadgeNumber = 0
-        UITabBar.appearance().unselectedItemTintColor = UIColor.white
-
+        UITabBar.appearance().unselectedItemTintColor = UIColor(red: 137, green: 109, blue: 99)
         
         
         //Delete schedule notifications 
-//        print(UIApplication.shared.scheduledLocalNotifications?.count)
-//        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-//        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        print(UIApplication.shared.scheduledLocalNotifications?.count)
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         
      
       
@@ -48,6 +47,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         PersistenceService.saveContext()
+    }
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        let newRed = CGFloat(red)/255
+        let newGreen = CGFloat(green)/255
+        let newBlue = CGFloat(blue)/255
+        
+        self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
     }
 }
 
