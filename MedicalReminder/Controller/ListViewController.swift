@@ -15,14 +15,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        listTableView.register(UINib(nibName: "CellForList", bundle: nil), forCellReuseIdentifier: "listCell")
         let fetchRequest: NSFetchRequest<Medicine> = Medicine.fetchRequest()
         do {
             let medicine = try PersistenceService.context.fetch(fetchRequest)
             medicineList = medicine
             listTableView.reloadData()
-        } catch {}
-        
-        
+        } catch {}     
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,21 +38,45 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: listCell, for: indexPath)
-        cell.textLabel?.text = medicineList[indexPath.row].name
-        cell.detailTextLabel?.text = ("\(medicineList[indexPath.row].totalQuantity)pcs left")
-        cell.textLabel?.textColor = UIColor.white
-        cell.detailTextLabel?.textColor = UIColor.white
-        cell.textLabel?.font = UIFont(name: "Hiragino Sans", size: 20)
-        cell.detailTextLabel?.font = UIFont(name: "Hiragino Sans", size: 15)
+        
+   
+        let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as! ListViewCell
+        
+        cell.nameLabel.text = medicineList[indexPath.row].name
+        cell.totalQuantityLabel.text = ("\(medicineList[indexPath.row].totalQuantity)pcs left")
+        if medicineList[indexPath.row].minute < 10{
+            cell.timeLabel.text = "\(medicineList[indexPath.row].hour):0\(medicineList[indexPath.row].minute)"
+        } else{
+            cell.timeLabel.text = "\(medicineList[indexPath.row].hour):\(medicineList[indexPath.row].minute)"
+        }
+        
+        if medicineList[indexPath.row].totalQuantity < 10 {
+            cell.accessoryType = .detailButton
+            cell.totalQuantityLabel.textColor = UIColor.red
+        }else{
+            cell.accessoryType = .none
+            cell.totalQuantityLabel.textColor = UIColor.white
+        }
+        
+        if medicineList[indexPath.row].totalQuantity <= 0 {
+            cell.totalQuantityLabel.text = "You have no pills left"
+        }
+        
+        
+        
         cell.selectionStyle = .none
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 65
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        refillAlert()
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+   
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             for i in 1...7{
@@ -73,23 +96,48 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         sender.title = (listTableView.isEditing) ? "Done" : "Edit"
     }
     
-    @IBAction func addMedicineButtonPressed(_ sender: UIButton) {
+    
+    @IBAction func addMedicineButton(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Add medicine", message: nil, preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = "Name..."
         }
         let continueAction = UIAlertAction(title: "Continue", style: .default) { (_) in
-            Name.medicineName = alert.textFields!.first!.text!
-            self.performSegue(withIdentifier: self.goToAdd, sender: nil)
+            if alert.textFields?.first?.text != ""{
+                Name.medicineName = alert.textFields!.first!.text!
+                self.performSegue(withIdentifier: self.goToAdd, sender: nil)
+            }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (action) in
             self.dismiss(animated: true, completion: nil)
         })
+        
+        
         alert.addAction(cancelAction)
         alert.addAction(continueAction)
         present(alert, animated: true, completion: nil)
     }
+    
+    func refillAlert() {
+        let refillAlert = UIAlertController(title: "Medical refill", message: "Your medicine is running out, time to get some new", preferredStyle: .alert)
+        
+        let addNewTotalQuantity = UIAlertAction(title: "I have! ", style: .default) { (_) in
+            print("SEGUE TO REFILLVIEW")
+        }
+        
+        let cancel = UIAlertAction(title: "OK", style: .cancel, handler: {
+            action in
+            self.dismiss(animated: true, completion: nil)
+        })
+        
+        refillAlert.addAction(addNewTotalQuantity)
+        refillAlert.addAction(cancel)
+        present(refillAlert, animated: true, completion: nil)
+    }
+    
+    
+    
 }
 
 struct Name {

@@ -16,9 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         //Delete schedule notifications 
-        print(UIApplication.shared.scheduledLocalNotifications?.count)
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+//        print(UIApplication.shared.scheduledLocalNotifications?.count)
+//        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+//        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         
      
       

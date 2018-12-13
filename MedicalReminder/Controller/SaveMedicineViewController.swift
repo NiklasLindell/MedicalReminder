@@ -20,6 +20,12 @@ class SaveMedicineViewController: UIViewController {
         CheckedDayConverter()
     }
     
+    @IBAction func cancelAddMedicineButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     @IBAction func minusQuantityButtonPressed(_ sender: UIButton) {
         if quantityShow > 1 {
             quantityShow -= 1
@@ -68,7 +74,6 @@ class SaveMedicineViewController: UIViewController {
         PersistenceService.saveContext()
         medicineList.append(medicine)
         setNotificationTime()
-        print(UIApplication.shared.scheduledLocalNotifications?.count)
         performSegue(withIdentifier: "goToList", sender: self)
         self.dismiss(animated: false, completion: nil)
     }
@@ -84,8 +89,6 @@ class SaveMedicineViewController: UIViewController {
         for days in checkedDayArray{
             var notiID = self.identifier
             notiID += String(days)
-            print(notiID)
-            NotificationsID.IDList.append(identifier)
             dateComponents.weekday = days
             dateComponents.hour = Time.hour
             dateComponents.minute = Time.minute
@@ -93,9 +96,7 @@ class SaveMedicineViewController: UIViewController {
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             notiID = self.identifier
-            
-            
-            
+    
         }
     }
     
@@ -128,9 +129,6 @@ struct Quantity {
     static var newQuantity: Int = 0
 }
 
-struct NotificationsID {
-    static var IDList = [String]()
-}
 
 
 

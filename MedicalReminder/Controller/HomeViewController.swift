@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
         
-        homeTableView.register(UINib(nibName: "Cell", bundle: nil), forCellReuseIdentifier: "cell")
+        homeTableView.register(UINib(nibName: "CellForHome", bundle: nil), forCellReuseIdentifier: "cell")
         
         let fetchRequest: NSFetchRequest<Medicine> = Medicine.fetchRequest()
         do {
@@ -48,6 +48,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         UIView.animate(withDuration: 1.5) {
             self.progressCircle.value = self.checkedMedicine
         }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,13 +67,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.nameLabel?.text = todaysMedicine[indexPath.row].name
         cell.amountLabel.text = ("\(todaysMedicine[indexPath.row].quantity)pcs per intake")
-        cell.textLabel?.textColor = UIColor.white
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 87
+        return 84
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -84,118 +84,99 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
                 self.checkedMedicine = self.checkedMedicine - 1
                 self.viewDidAppear(true)
-                
+                let totalQuantity = todaysMedicine[indexPath.row].totalQuantity
+                let newTotalQuantity = totalQuantity + todaysMedicine[indexPath.row].quantity // Changing totalQuantaty for
+                medicineList[indexPath.row].totalQuantity = newTotalQuantity                  // object in CoreData
+                PersistenceService.saveContext()
             } else {
                 tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
                 self.checkedMedicine = self.checkedMedicine + 1
                 self.viewDidAppear(true)
-              
+                let totalQuantity = todaysMedicine[indexPath.row].totalQuantity
+                let newTotalQuantity = totalQuantity - todaysMedicine[indexPath.row].quantity  // Changing totalQuantaty for
+                medicineList[indexPath.row].totalQuantity = newTotalQuantity                   // object in CoreData
+                PersistenceService.saveContext()
             }
         }
     }
 
     func getMedicineForDay() {
-        
         let dayName = date.toString(dateFormat: "EEEE")
-        
         if dayName == "Monday" {
-    
             for medicine in medicineList{
-                
                 if medicine.monday == true {
-        
                     if todaysMedicine.contains(medicine){
                         print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
                 }
-                
             }
-   
         }
         if dayName == "Tuesday" {
             for medicine in medicineList{
-                
                 if medicine.tuesday == true {
-                    
                     if todaysMedicine.contains(medicine){
                         print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
                 }
-                
             }
         }
         if dayName == "Wednesday"{
             for medicine in medicineList{
-                
                 if medicine.wednesday == true {
-                    
                     if todaysMedicine.contains(medicine){
                         print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
                 }
-                
             }
         }
         if dayName == "Thursday" {
             for medicine in medicineList{
-                
                 if medicine.thursday == true {
-                    
                     if todaysMedicine.contains(medicine){
                         print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
                 }
-                
             }
         }
         if dayName == "Friday" {
             for medicine in medicineList{
-                
                 if medicine.friday == true {
-                    
                     if todaysMedicine.contains(medicine){
                         print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
                 }
-                
             }
         }
         if dayName == "Saturday" {
             for medicine in medicineList{
-                
                 if medicine.saturday == true {
-                    
                     if todaysMedicine.contains(medicine){
                         print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
                 }
-                
             }
         }
         if dayName == "Sunday" {
             for medicine in medicineList{
-                
                 if medicine.sunday == true {
-                    
                     if todaysMedicine.contains(medicine){
                         print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
                 }
-                
             }
         }
     }
@@ -209,7 +190,5 @@ extension Date
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
-    
-    
 }
 
