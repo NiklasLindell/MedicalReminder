@@ -3,6 +3,8 @@ import CoreData
 import UserNotifications
 import MBCircularProgressBar
 
+let defaults = UserDefaults.standard
+
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
     @IBOutlet weak var dayLabel: UILabel!

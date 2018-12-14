@@ -29,7 +29,8 @@
 		4FF9B3E021B1450F00ADBBD2 /* SaveMedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3DF21B1450F00ADBBD2 /* SaveMedicineViewController.swift */; };
 		4FF9B3E221B1451900ADBBD2 /* TimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3E121B1451900ADBBD2 /* TimesViewController.swift */; };
 		4FF9B3E421B1452800ADBBD2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3E321B1452800ADBBD2 /* SettingsViewController.swift */; };
-		4FF9B3E621B1453400ADBBD2 /* CameraSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9B3E521B1453400ADBBD2 /* CameraSettingsViewController.swift */; };
+		4FFAFCF921C3E997000171E3 /* RefillMedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFAFCF821C3E997000171E3 /* RefillMedicineViewController.swift */; };
+		4FFAFCFB21C40E6E000171E3 /* RefillSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFAFCFA21C40E6E000171E3 /* RefillSettingViewController.swift */; };
 		E8020BC470B777196D456E6D /* Pods_MedicalReminder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA91996DAA48DB0FB170AD0A /* Pods_MedicalReminder.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,7 +80,8 @@
 		4FF9B3DF21B1450F00ADBBD2 /* SaveMedicineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMedicineViewController.swift; sourceTree = "<group>"; };
 		4FF9B3E121B1451900ADBBD2 /* TimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesViewController.swift; sourceTree = "<group>"; };
 		4FF9B3E321B1452800ADBBD2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		4FF9B3E521B1453400ADBBD2 /* CameraSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSettingsViewController.swift; sourceTree = "<group>"; };
+		4FFAFCF821C3E997000171E3 /* RefillMedicineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefillMedicineViewController.swift; sourceTree = "<group>"; };
+		4FFAFCFA21C40E6E000171E3 /* RefillSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefillSettingViewController.swift; sourceTree = "<group>"; };
 		5FF5A9FBD48665DCA8E3925F /* Pods-MedicalReminder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicalReminder.release.xcconfig"; path = "Pods/Target Support Files/Pods-MedicalReminder/Pods-MedicalReminder.release.xcconfig"; sourceTree = "<group>"; };
 		68F23AB6AE340C405F9CCFA6 /* Pods-MedicalReminder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicalReminder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedicalReminder/Pods-MedicalReminder.debug.xcconfig"; sourceTree = "<group>"; };
 		6C6CE5F942ED83BDF1D81AF4 /* Pods-MedicalReminderUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicalReminderUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedicalReminderUITests/Pods-MedicalReminderUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -211,7 +213,8 @@
 				4FF9B3E121B1451900ADBBD2 /* TimesViewController.swift */,
 				4FF9B3DF21B1450F00ADBBD2 /* SaveMedicineViewController.swift */,
 				4FF9B3E321B1452800ADBBD2 /* SettingsViewController.swift */,
-				4FF9B3E521B1453400ADBBD2 /* CameraSettingsViewController.swift */,
+				4FFAFCFA21C40E6E000171E3 /* RefillSettingViewController.swift */,
+				4FFAFCF821C3E997000171E3 /* RefillMedicineViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -472,14 +475,15 @@
 				4FF29AFC21B14828008ADB66 /* PersistenceService.swift in Sources */,
 				4FF9B3E221B1451900ADBBD2 /* TimesViewController.swift in Sources */,
 				4FB7C74021B161BF00700C59 /* Medicine+CoreDataProperties.swift in Sources */,
+				4FFAFCFB21C40E6E000171E3 /* RefillSettingViewController.swift in Sources */,
 				4FF9B3E421B1452800ADBBD2 /* SettingsViewController.swift in Sources */,
+				4FFAFCF921C3E997000171E3 /* RefillMedicineViewController.swift in Sources */,
 				4F1B10AE21C2A0A3000F1AEE /* ListViewCell.swift in Sources */,
 				4FB7C73F21B161BF00700C59 /* Medicine+CoreDataClass.swift in Sources */,
 				4FF9B3B021B143E900ADBBD2 /* MedicalReminder.xcdatamodeld in Sources */,
 				4FF9B3E021B1450F00ADBBD2 /* SaveMedicineViewController.swift in Sources */,
 				4FF9B3DE21B144FF00ADBBD2 /* ListViewController.swift in Sources */,
 				4FF29AF621B146C3008ADB66 /* DaysViewController.swift in Sources */,
-				4FF9B3E621B1453400ADBBD2 /* CameraSettingsViewController.swift in Sources */,
 				4FF9B3A821B143E900ADBBD2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

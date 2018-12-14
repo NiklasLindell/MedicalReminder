@@ -9,9 +9,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var listTableView: UITableView!
     
+    var selectedMedicine: Medicine!
+    
     let center = UNUserNotificationCenter.current()
-    let goToAdd: String = "goToAddMedicine"
+    let goToAdd = "goToAddMedicine"
+    let goToRefill = "goToRefill"
     let listCell = "listCell"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +54,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.timeLabel.text = "\(medicineList[indexPath.row].hour):\(medicineList[indexPath.row].minute)"
         }
         
-        if medicineList[indexPath.row].totalQuantity < 10 {
+        if medicineList[indexPath.row].totalQuantity < defaults.integer(forKey: "RefillReminder") {
             cell.accessoryType = .detailButton
             cell.totalQuantityLabel.textColor = UIColor.red
         }else{
@@ -68,15 +72,25 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    
+    
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        refillAlert()
+        selectedMedicine = medicineList[indexPath.row]
+        self.performSegue(withIdentifier: goToRefill, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == goToRefill) {
+            let navigationDestination = segue.destination as! UINavigationController
+            let destination = navigationDestination.topViewController as! RefillMedicineViewController
+            destination.selectedMedicine = selectedMedicine
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
     
-   
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             for i in 1...7{
@@ -96,7 +110,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         sender.title = (listTableView.isEditing) ? "Done" : "Edit"
     }
     
-    
     @IBAction func addMedicineButton(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Add medicine", message: nil, preferredStyle: .alert)
         alert.addTextField { (textField) in
@@ -112,32 +125,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             (action) in
             self.dismiss(animated: true, completion: nil)
         })
-        
-        
         alert.addAction(cancelAction)
         alert.addAction(continueAction)
         present(alert, animated: true, completion: nil)
     }
-    
-    func refillAlert() {
-        let refillAlert = UIAlertController(title: "Medical refill", message: "Your medicine is running out, time to get some new", preferredStyle: .alert)
-        
-        let addNewTotalQuantity = UIAlertAction(title: "I have! ", style: .default) { (_) in
-            print("SEGUE TO REFILLVIEW")
-        }
-        
-        let cancel = UIAlertAction(title: "OK", style: .cancel, handler: {
-            action in
-            self.dismiss(animated: true, completion: nil)
-        })
-        
-        refillAlert.addAction(addNewTotalQuantity)
-        refillAlert.addAction(cancel)
-        present(refillAlert, animated: true, completion: nil)
-    }
-    
-    
-    
 }
 
 struct Name {
