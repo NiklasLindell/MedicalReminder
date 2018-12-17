@@ -14,8 +14,8 @@ class SaveMedicineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        quantityLabel?.text = "1st"
-        totalQuantityLabel?.text = "25st"
+        quantityLabel?.text = "1pcs"
+        totalQuantityLabel?.text = "25pcs"
         checkedDayArray = []
         CheckedDayConverter()
     }
@@ -29,13 +29,13 @@ class SaveMedicineViewController: UIViewController {
     @IBAction func minusQuantityButtonPressed(_ sender: UIButton) {
         if quantityShow > 1 {
             quantityShow -= 1
-            quantityLabel.text = "\(quantityShow)st"
+            quantityLabel.text = "\(quantityShow)pcs"
         }
     }
     
     @IBAction func plusQuantityButtonPressed(_ sender: UIButton) {
         quantityShow += 1
-        quantityLabel.text = "\(quantityShow)st"
+        quantityLabel.text = "\(quantityShow)pcs"
     }
     
     @IBAction func quantityButton(_ sender: Any) {
@@ -45,13 +45,13 @@ class SaveMedicineViewController: UIViewController {
     @IBAction func minusTotalQuantityButton(_ sender: UIButton) {
         if totalQuantity > 1 {
             totalQuantity -= 1
-            totalQuantityLabel.text = "\(totalQuantity)st"
+            totalQuantityLabel.text = "\(totalQuantity)pcs"
         }
     }
     
     @IBAction func plusTotalQuantityButton(_ sender: UIButton) {
         totalQuantity += 1
-        totalQuantityLabel.text = "\(totalQuantity)st"
+        totalQuantityLabel.text = "\(totalQuantity)pcs"
     }
     
     @IBAction func finishButtonPressed(_ sender: UIButton) {
@@ -82,7 +82,8 @@ class SaveMedicineViewController: UIViewController {
       
         let content = UNMutableNotificationContent()
         content.title = "Time to take your medicine!"
-        content.body = "\(Name.medicineName) \(Quantity.newQuantity)pcs"
+        content.subtitle = "Take \(Quantity.newQuantity)pcs \(Name.medicineName)"
+        content.body = "Check \(Name.medicineName) when it's taken"
         content.sound = UNNotificationSound.default
         content.badge = 1
         var dateComponents = DateComponents()

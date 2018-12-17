@@ -78,7 +78,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         selectedMedicine = medicineList[indexPath.row]
         self.performSegue(withIdentifier: goToRefill, sender: self)
     }
-    
+     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == goToRefill) {
             let navigationDestination = segue.destination as! UINavigationController
