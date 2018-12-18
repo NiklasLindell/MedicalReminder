@@ -1,9 +1,8 @@
 import UIKit
 import CoreData
 import UserNotifications
+import AudioToolbox
 import MBCircularProgressBar
-
-let defaults = UserDefaults.standard
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
@@ -14,18 +13,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var progressCircle: MBCircularProgressBarView!
     
     var todaysMedicine: [Medicine] = []
-    var checkedMedicine = defaults.float(forKey: "progressCircle")
+    var checkedMedicine = 0
     
     
-    let date = Date()
+    var date = Date()
     let formatter = DateFormatter()
+   
+    
     let homeCell = "homeCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if checkedMedicine < 0 {
-            defaults.set(0.0, forKey: "progressCircle")
-        }
+
+    
+      
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
         
         homeTableView.register(UINib(nibName: "CellForHome", bundle: nil), forCellReuseIdentifier: "cell")
@@ -36,25 +37,32 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             medicineList = medicine
             homeTableView.reloadData()
         } catch {}
+    
         
+        
+        self.progressCircle.value = 0
+    }
+    
+    @objc func updateDate(){
+        date = Date()
         dayLabel.text = date.toString(dateFormat: "dd")
         monthLabel.text = date.toString(dateFormat: "LLLL")
         weekdayLabel.text = date.toString(dateFormat: "EEEE")
-       
-        self.progressCircle.value = CGFloat(defaults.float(forKey: "progressCircle"))
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         todaysMedicine = []
         getMedicineForDay()
         homeTableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateDate), userInfo: self, repeats: true)
         self.progressCircle.maxValue = CGFloat(todaysMedicine.count)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         UIView.animate(withDuration: 1.5) {
-                self.progressCircle.value = CGFloat(defaults.float(forKey: "progressCircle"))
+            self.progressCircle.value = CGFloat(self.checkedMedicine)
         }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,11 +80,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         cell.nameLabel?.text = todaysMedicine[indexPath.row].name
         cell.amountLabel.text = ("\(todaysMedicine[indexPath.row].quantity)pcs per intake")
-        if todaysMedicine[indexPath.row].taken == true {
-            cell.accessoryType = .checkmark
-        } else{
-            cell.accessoryType = .none
-        }
         cell.selectionStyle = .none
         return cell
     }
@@ -93,21 +96,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark{
                 tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
                 checkedMedicine = checkedMedicine - 1
+                AudioServicesPlayAlertSound(1519)
                 let totalQuantity = todaysMedicine[indexPath.row].totalQuantity
                 let newTotalQuantity = totalQuantity + todaysMedicine[indexPath.row].quantity // Changing totalQuantaty for
                 medicineList[indexPath.row].totalQuantity = newTotalQuantity                  // object in CoreData
-                medicineList[indexPath.row].taken = false
                 PersistenceService.saveContext()
             } else {
                 tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
                 checkedMedicine += 1
+                AudioServicesPlayAlertSound(1519)
                 let totalQuantity = todaysMedicine[indexPath.row].totalQuantity
                 let newTotalQuantity = totalQuantity - todaysMedicine[indexPath.row].quantity  // Changing totalQuantaty for
                 medicineList[indexPath.row].totalQuantity = newTotalQuantity                   // object in CoreData
-                medicineList[indexPath.row].taken = true
                 PersistenceService.saveContext()
             }
-            defaults.set(checkedMedicine, forKey: "progressCircle")
             self.viewDidAppear(true)
         }
     }
@@ -192,6 +194,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
 }
 
 extension Date

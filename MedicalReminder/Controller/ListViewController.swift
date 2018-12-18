@@ -16,6 +16,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     let goToRefill = "goToRefill"
     let listCell = "listCell"
     
+    var monday = ""
+    var tuesday = ""
+    var wednesday = ""
+    var thursday = ""
+    var friday = ""
+    var saturday = ""
+    var sunday = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,18 +50,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
    
         let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as! ListViewCell
         
         cell.nameLabel.text = medicineList[indexPath.row].name
         cell.totalQuantityLabel.text = ("\(medicineList[indexPath.row].totalQuantity)pcs left")
-        if medicineList[indexPath.row].minute < 10{
-            cell.timeLabel.text = "\(medicineList[indexPath.row].hour):0\(medicineList[indexPath.row].minute)"
-        } else{
-            cell.timeLabel.text = "\(medicineList[indexPath.row].hour):\(medicineList[indexPath.row].minute)"
-        }
-        
         if medicineList[indexPath.row].totalQuantity < defaults.integer(forKey: "RefillReminder") {
             cell.accessoryType = .detailButton
             cell.totalQuantityLabel.textColor = UIColor.red
@@ -61,10 +62,55 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.accessoryType = .none
             cell.totalQuantityLabel.textColor = UIColor.white
         }
-        
         if medicineList[indexPath.row].totalQuantity <= 0 {
             cell.totalQuantityLabel.text = "You have no pills left"
         }
+        
+        
+        if medicineList[indexPath.row].monday == true{
+            monday = "Mon "
+        }else{
+            monday = ""
+        }
+        if medicineList[indexPath.row].tuesday == true{
+            tuesday = "Tue "
+        }else{
+            tuesday = ""
+        }
+        if medicineList[indexPath.row].wednesday == true{
+            wednesday = "Wed "
+        }else{
+            wednesday = ""
+        }
+        if medicineList[indexPath.row].thursday == true{
+            thursday = "Thu "
+        }else{
+            thursday = ""
+        }
+        if medicineList[indexPath.row].friday == true{
+            friday = "Fri "
+        }else{
+            friday = ""
+        }
+        if medicineList[indexPath.row].saturday == true{
+            saturday = "Sat "
+        }else{
+            saturday = ""
+        }
+        if medicineList[indexPath.row].sunday == true{
+            sunday = "Sun "
+        }else{
+            sunday = ""
+        }
+        
+        if medicineList[indexPath.row].minute < 10{
+            cell.timeAndDays.text = ("\(medicineList[indexPath.row].hour):0\(medicineList[indexPath.row].minute) every \(monday)\(tuesday)\(wednesday)\(thursday)\(friday)\(saturday)\(sunday)")
+        } else{
+            cell.timeAndDays.text = ("\(medicineList[indexPath.row].hour):\(medicineList[indexPath.row].minute) every \(monday)\(tuesday)\(wednesday)\(thursday)\(friday)\(saturday)\(sunday)")
+        }
+        
+        
+        
         
         
         

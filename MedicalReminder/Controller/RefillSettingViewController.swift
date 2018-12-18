@@ -1,5 +1,7 @@
 import UIKit
 
+let defaults = UserDefaults.standard
+
 class RefillSettingViewController: UIViewController {
     
     @IBOutlet weak var totalQuantityLabel: UILabel!

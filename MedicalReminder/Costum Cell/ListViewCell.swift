@@ -14,13 +14,8 @@ class ListViewCell: UITableViewCell {
     
     @IBOutlet weak var totalQuantityLabel: UILabel!
     
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var timeAndDays: UILabel!
     
-    @IBOutlet weak var warningSign: UIButton!
-    
-    
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
