@@ -30,4 +30,5 @@ extension Medicine {
     @NSManaged public var hour: Int16
     @NSManaged public var minute: Int16
     @NSManaged public var identifier: String?
+    @NSManaged public var taken: Bool
 }

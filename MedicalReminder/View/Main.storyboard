@@ -316,7 +316,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YD1-KN-m1G">
-                                <rect key="frame" x="64" y="675" width="246" height="45"/>
+                                <rect key="frame" x="64" y="637" width="246" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="FinishButton"/>
                                 <connections>
@@ -353,21 +353,22 @@
                                     <action selector="cancelButton:" destination="sA8-S9-naU" eventType="touchUpInside" id="oq5-iX-j8u"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4o-Hd-Y9m">
+                                <rect key="frame" x="64" y="710" width="246" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="CancelButton"/>
+                                <connections>
+                                    <action selector="cancelButton:" destination="sA8-S9-naU" eventType="touchUpInside" id="Vl3-p9-Iur"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Ra-he-d3R"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Refill medicine" id="xjq-3m-Ajj">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="mtC-RK-xYO">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="cancelBarButton:" destination="sA8-S9-naU" id="kpq-oa-O1r"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Refill medicine" id="xjq-3m-Ajj"/>
                     <connections>
-                        <outlet property="cancelBarButton" destination="mtC-RK-xYO" id="GQ1-hl-dSq"/>
                         <outlet property="cancelButton" destination="YpO-kN-tad" id="Efe-sq-OYq"/>
+                        <outlet property="cancelButtonWhenRefill" destination="d4o-Hd-Y9m" id="mdc-aT-Ucd"/>
                         <outlet property="doneButton" destination="YD1-KN-m1G" id="b0R-df-V6N"/>
                         <outlet property="minusButton" destination="NcY-lr-Ftl" id="2lq-Gk-hnU"/>
                         <outlet property="plusButton" destination="Xl6-xc-giw" id="X9z-Mc-mAK"/>
@@ -627,7 +628,7 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="showValueString" value="NO"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="value">
-                                        <real key="value" value="75"/>
+                                        <real key="value" value="70"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
                                         <real key="value" value="100"/>

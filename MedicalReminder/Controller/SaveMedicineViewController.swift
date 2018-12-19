@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import AudioToolbox
 import UserNotifications
 
 class SaveMedicineViewController: UIViewController {
@@ -30,12 +31,14 @@ class SaveMedicineViewController: UIViewController {
         if quantityShow > 1 {
             quantityShow -= 1
             quantityLabel.text = "\(quantityShow)pcs"
+             AudioServicesPlayAlertSound(1519)
         }
     }
     
     @IBAction func plusQuantityButtonPressed(_ sender: UIButton) {
         quantityShow += 1
         quantityLabel.text = "\(quantityShow)pcs"
+         AudioServicesPlayAlertSound(1519)
     }
     
     @IBAction func quantityButton(_ sender: Any) {
@@ -46,12 +49,14 @@ class SaveMedicineViewController: UIViewController {
         if totalQuantity > 1 {
             totalQuantity -= 1
             totalQuantityLabel.text = "\(totalQuantity)pcs"
+             AudioServicesPlayAlertSound(1519)
         }
     }
     
     @IBAction func plusTotalQuantityButton(_ sender: UIButton) {
         totalQuantity += 1
         totalQuantityLabel.text = "\(totalQuantity)pcs"
+         AudioServicesPlayAlertSound(1519)
     }
     
     @IBAction func finishButtonPressed(_ sender: UIButton) {

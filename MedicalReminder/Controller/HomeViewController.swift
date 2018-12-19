@@ -12,21 +12,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var progressCircle: MBCircularProgressBarView!
     
-    var todaysMedicine: [Medicine] = []
-    var checkedMedicine = 0
     
+    var todaysMedicine: [Medicine] = []
+    var checkedMedicine: [Medicine] = []
     
     var date = Date()
     let formatter = DateFormatter()
    
-    
     let homeCell = "homeCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    
-      
+        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
         
         homeTableView.register(UINib(nibName: "CellForHome", bundle: nil), forCellReuseIdentifier: "cell")
@@ -37,31 +34,26 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             medicineList = medicine
             homeTableView.reloadData()
         } catch {}
-    
         
-        
-        self.progressCircle.value = 0
+        todaysMedicine = []
+        getMedicineForDay()
+        progressCircleMove()
+        homeTableView.reloadData()
     }
     
-    @objc func updateDate(){
-        date = Date()
-        dayLabel.text = date.toString(dateFormat: "dd")
-        monthLabel.text = date.toString(dateFormat: "LLLL")
-        weekdayLabel.text = date.toString(dateFormat: "EEEE")
-        todaysMedicine = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateDate), userInfo: self, repeats: true)
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(calendarDayDidChange), name:.NSCalendarDayChanged, object:nil)
+        
+        progressCircleMove()
         getMedicineForDay()
         homeTableView.reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateDate), userInfo: self, repeats: true)
-        self.progressCircle.maxValue = CGFloat(todaysMedicine.count)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
-        UIView.animate(withDuration: 1.5) {
-            self.progressCircle.value = CGFloat(self.checkedMedicine)
-        }
+        progressCircleMove()
         
     }
     
@@ -72,7 +64,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         
-        
         if todaysMedicine[indexPath.row].minute < 10{
             cell.timeLabel.text = "\(todaysMedicine[indexPath.row].hour):0\(todaysMedicine[indexPath.row].minute)"
         } else{
@@ -80,6 +71,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         cell.nameLabel?.text = todaysMedicine[indexPath.row].name
         cell.amountLabel.text = ("\(todaysMedicine[indexPath.row].quantity)pcs per intake")
+        
+        if todaysMedicine[indexPath.row].taken == true{
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
         cell.selectionStyle = .none
         return cell
     }
@@ -95,22 +92,25 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if tableView == homeTableView {
             if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark{
                 tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
-                checkedMedicine = checkedMedicine - 1
                 AudioServicesPlayAlertSound(1519)
                 let totalQuantity = todaysMedicine[indexPath.row].totalQuantity
                 let newTotalQuantity = totalQuantity + todaysMedicine[indexPath.row].quantity // Changing totalQuantaty for
                 medicineList[indexPath.row].totalQuantity = newTotalQuantity                  // object in CoreData
+                todaysMedicine[indexPath.row].taken = false
+                progressCircleMove()
                 PersistenceService.saveContext()
             } else {
                 tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
-                checkedMedicine += 1
                 AudioServicesPlayAlertSound(1519)
                 let totalQuantity = todaysMedicine[indexPath.row].totalQuantity
                 let newTotalQuantity = totalQuantity - todaysMedicine[indexPath.row].quantity  // Changing totalQuantaty for
                 medicineList[indexPath.row].totalQuantity = newTotalQuantity                   // object in CoreData
+                todaysMedicine[indexPath.row].taken = true
+                progressCircleMove()
                 PersistenceService.saveContext()
             }
-            self.viewDidAppear(true)
+            
+            homeTableView.reloadData()
         }
     }
 
@@ -120,7 +120,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             for medicine in medicineList{
                 if medicine.monday == true {
                     if todaysMedicine.contains(medicine){
-                        print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
@@ -131,7 +130,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             for medicine in medicineList{
                 if medicine.tuesday == true {
                     if todaysMedicine.contains(medicine){
-                        print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
@@ -142,7 +140,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             for medicine in medicineList{
                 if medicine.wednesday == true {
                     if todaysMedicine.contains(medicine){
-                        print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
@@ -153,7 +150,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             for medicine in medicineList{
                 if medicine.thursday == true {
                     if todaysMedicine.contains(medicine){
-                        print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
@@ -164,7 +160,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             for medicine in medicineList{
                 if medicine.friday == true {
                     if todaysMedicine.contains(medicine){
-                        print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
@@ -175,7 +170,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             for medicine in medicineList{
                 if medicine.saturday == true {
                     if todaysMedicine.contains(medicine){
-                        print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
@@ -186,7 +180,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             for medicine in medicineList{
                 if medicine.sunday == true {
                     if todaysMedicine.contains(medicine){
-                        print("Finns redan i listan")
                     }else{
                         todaysMedicine.append(medicine)
                     }
@@ -195,6 +188,34 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    @objc func updateDate(){
+        date = Date()
+        dayLabel.text = date.toString(dateFormat: "dd")
+        monthLabel.text = date.toString(dateFormat: "LLLL")
+        weekdayLabel.text = date.toString(dateFormat: "EEEE")
+        todaysMedicine = []
+        getMedicineForDay()
+        homeTableView.reloadData()
+        
+    }
+    @objc func calendarDayDidChange()
+    {
+        todaysMedicine = []
+        progressCircleMove()
+    }
+    
+    func progressCircleMove() {
+        self.progressCircle.maxValue = CGFloat(todaysMedicine.count)
+        checkedMedicine.removeAll()
+        for medicines in todaysMedicine{
+            if medicines.taken == true{
+                self.checkedMedicine.append(medicines)
+            }
+        }
+        UIView.animate(withDuration: 1.5) {
+            self.progressCircle.value = CGFloat(self.checkedMedicine.count)
+        }
+    }
 }
 
 extension Date
