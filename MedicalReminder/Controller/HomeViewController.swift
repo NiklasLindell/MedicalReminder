@@ -201,6 +201,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func calendarDayDidChange()
     {
         todaysMedicine = []
+        for medicines in medicineList{
+            if medicines.taken == true{
+                medicines.taken = false
+            }
+        }
         progressCircleMove()
     }
     
