@@ -12,6 +12,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var selectedMedicine: Medicine!
     
     let center = UNUserNotificationCenter.current()
+    var fetchController : NSFetchedResultsController<Medicine>!
     let goToAdd = "goToAddMedicine"
     let goToRefill = "goToRefill"
     let listCell = "listCell"
@@ -28,15 +29,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         listTableView.register(UINib(nibName: "CellForList", bundle: nil), forCellReuseIdentifier: "listCell")
-        let fetchRequest: NSFetchRequest<Medicine> = Medicine.fetchRequest()
-        do {
-            let medicine = try PersistenceService.context.fetch(fetchRequest)
-            medicineList = medicine
-            listTableView.reloadData()
-        } catch {}     
+        fetchMedicines()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        fetchMedicines()
         listTableView.reloadData()
         if medicineList.count == 0{
             textLabel.text = "You have no medicines. Click on the add-button to add your first."
@@ -108,12 +105,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else{
             cell.timeAndDays.text = ("\(medicineList[indexPath.row].hour):\(medicineList[indexPath.row].minute) every \(monday)\(tuesday)\(wednesday)\(thursday)\(friday)\(saturday)\(sunday)")
         }
-        
-        
-        
-        
-        
-        
+   
         cell.selectionStyle = .none
         return cell
     }
@@ -149,6 +141,15 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             PersistenceService.saveContext()
             self.viewWillAppear(true)
         }
+    }
+    
+    func fetchMedicines() {
+        let fetchRequest: NSFetchRequest<Medicine> = Medicine.fetchRequest()
+        do {
+            let medicine = try PersistenceService.context.fetch(fetchRequest)
+            medicineList = medicine
+            listTableView.reloadData()
+        } catch {} 
     }
     
     @IBAction func editButton(_ sender: UIBarButtonItem) {

@@ -13,15 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         application.applicationIconBadgeNumber = 0
         UITabBar.appearance().unselectedItemTintColor = UIColor(red: 137, green: 109, blue: 99)
-        
-        
-        //Delete schedule notifications 
-//        print(UIApplication.shared.scheduledLocalNotifications?.count)
-//        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-//        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-        
-     
-      
         return true
     }
     
