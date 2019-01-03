@@ -77,7 +77,6 @@ class SaveMedicineViewController: UIViewController {
         medicine.identifier = identifier
         
         PersistenceService.saveContext()
-        medicineList.append(medicine)
         setNotificationTime()
         performSegue(withIdentifier: "goToList", sender: self)
         self.dismiss(animated: false, completion: nil)

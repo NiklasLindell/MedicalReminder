@@ -16,6 +16,8 @@ class TimesViewController: UIViewController {
         Time.hour = components.hour!
         Time.minute = components.minute!
     }
+    
+    
 }
 
 struct Time {

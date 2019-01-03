@@ -2,7 +2,7 @@ import UIKit
 import CoreData
 import UserNotifications
 
-var medicineList = [Medicine]()
+
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
@@ -10,6 +10,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var listTableView: UITableView!
     
     var selectedMedicine: Medicine!
+    var medicineList = [Medicine]()
     
     let center = UNUserNotificationCenter.current()
     var fetchController : NSFetchedResultsController<Medicine>!

@@ -13,6 +13,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var progressCircle: MBCircularProgressBarView!
     
     var checkedMedicine: [Medicine] = []
+    var todaysMedicine = [Medicine]()
     
     var date = Date()
     let formatter = DateFormatter()
@@ -33,57 +34,36 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         homeTableView.reloadData()
     }
     
-    func setupFetchedResultsController(){
-        var dayName = date.toString(dateFormat: "EEEE")
-        dayName = dayName.lowercased()
-        let predicate = NSPredicate(format: "\(dayName) == %@", NSNumber(value: true))
-        let request : NSFetchRequest<Medicine> = Medicine.fetchRequest()
-        request.predicate = predicate
-        let sortBy = NSSortDescriptor(key: "hour", ascending: true)
-        request.sortDescriptors = [sortBy]
-        self.fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: PersistenceService.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        do{
-            let medicine = try PersistenceService.context.fetch(request)
-            medicineList = medicine
-            try fetchResultsController?.performFetch()
-        }catch{
-            print(error.localizedDescription)
-        }
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateDate), userInfo: self, repeats: true)
-        
-        NotificationCenter.default.addObserver(self, selector:#selector(calendarDayDidChange), name:.NSCalendarDayChanged, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(newDay), name:.NSCalendarDayChanged, object:nil)
         
         setupFetchedResultsController()
         progressCircleMove()
         homeTableView.reloadData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        progressCircleMove()
-        print(checkedMedicine.count)
+        
+        
         
     }
+  
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return todaysMedicine.count
-        return fetchResultsController?.fetchedObjects?.count ?? 0
+        return todaysMedicine.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         
-        if medicineList[indexPath.row].minute < 10{
-            cell.timeLabel.text = "\(medicineList[indexPath.row].hour):0\(medicineList[indexPath.row].minute)"
+        if todaysMedicine[indexPath.row].minute < 10{
+            cell.timeLabel.text = "\(todaysMedicine[indexPath.row].hour):0\(todaysMedicine[indexPath.row].minute)"
         } else{
-            cell.timeLabel.text = "\(medicineList[indexPath.row].hour):\(medicineList[indexPath.row].minute)"
+            cell.timeLabel.text = "\(todaysMedicine[indexPath.row].hour):\(todaysMedicine[indexPath.row].minute)"
         }
-        cell.nameLabel?.text = medicineList[indexPath.row].name
-        cell.amountLabel.text = ("\(medicineList[indexPath.row].quantity)pcs per intake")
+        cell.nameLabel?.text = todaysMedicine[indexPath.row].name
+        cell.amountLabel.text = ("\(todaysMedicine[indexPath.row].quantity)pcs per intake")
 
-        if medicineList[indexPath.row].taken == true{
+        if todaysMedicine[indexPath.row].taken == true{
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -104,22 +84,40 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark{
                 tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
                 AudioServicesPlayAlertSound(1519)
-                let newTotalQuantity = medicineList[indexPath.row].totalQuantity + medicineList[indexPath.row].quantity
+                let newTotalQuantity = todaysMedicine[indexPath.row].totalQuantity + todaysMedicine[indexPath.row].quantity
                 fetchResultsController.object(at: indexPath).totalQuantity  = newTotalQuantity // Updating CoreData
-                medicineList[indexPath.row].taken = false
+                todaysMedicine[indexPath.row].taken = false
                 progressCircleMove()
                 PersistenceService.saveContext()
             } else {
                 tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
                 AudioServicesPlayAlertSound(1519)
-                let newTotalQuantity =  medicineList[indexPath.row].totalQuantity - medicineList[indexPath.row].quantity
+                let newTotalQuantity =  todaysMedicine[indexPath.row].totalQuantity - todaysMedicine[indexPath.row].quantity
                 fetchResultsController.object(at: indexPath).totalQuantity  = newTotalQuantity // Updating Coredata
-                medicineList[indexPath.row].taken = true
+                todaysMedicine[indexPath.row].taken = true
                 progressCircleMove()
                 PersistenceService.saveContext()
             }
             
             homeTableView.reloadData()
+        }
+    }
+    
+    func setupFetchedResultsController(){
+        var dayName = date.toString(dateFormat: "EEEE")
+        dayName = dayName.lowercased()
+        let predicate = NSPredicate(format: "\(dayName) == %@", NSNumber(value: true))
+        let request : NSFetchRequest<Medicine> = Medicine.fetchRequest()
+        request.predicate = predicate
+        let sortBy = NSSortDescriptor(key: "hour", ascending: true)
+        request.sortDescriptors = [sortBy]
+        self.fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: PersistenceService.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        do{
+            let medicine = try PersistenceService.context.fetch(request)
+            todaysMedicine = medicine
+            try fetchResultsController?.performFetch()
+        }catch{
+            print(error.localizedDescription)
         }
     }
 
@@ -131,20 +129,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         homeTableView.reloadData()
         
     }
-    @objc func calendarDayDidChange()
-    {
-        for medicines in checkedMedicine{
+    
+    @objc func newDay() {
+        
+        for medicines in todaysMedicine{
             if medicines.taken == true{
                 medicines.taken = false
             }
         }
-        progressCircleMove()
+        print("NEW DAY")
     }
     
-    func progressCircleMove() {
+   func progressCircleMove() {
+    
         self.progressCircle.maxValue = CGFloat((fetchResultsController?.fetchedObjects?.count)!)
         checkedMedicine.removeAll()
-        for medicines in medicineList{
+        for medicines in todaysMedicine{
             if medicines.taken == true{
                 self.checkedMedicine.append(medicines)
             }
